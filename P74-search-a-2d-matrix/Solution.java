@@ -1,29 +1,23 @@
 import java.util.Arrays;
 
 class Solution {
-    public static void rotate(int[][] matrix) {
-
-        for (int j = 0; j < matrix.length / 2; j++) {
-            int endIndex = matrix.length - j - 1;
-            for (int i = j; i < endIndex; i++) {
-                int currentIndex = matrix.length - i - 1;
-                int right = matrix[i][endIndex];
-                matrix[i][endIndex] = matrix[j][i];
-                int bottom = matrix[endIndex][currentIndex];
-                matrix[endIndex][currentIndex] = right;
-                int left = matrix[currentIndex][j];
-                matrix[currentIndex][j] = bottom;
-                matrix[j][i] = left;
-            }
+    public static boolean searchMatrix(int[][] matrix, int target) {
+        int low = 0;
+        int columns = matrix[0].length;
+        int high = matrix.length * columns - 1;
+        while (low <= high) {
+            int indexMid = (low + high) / 2;
+            int mid = matrix[indexMid / columns][indexMid % columns];
+            if (mid == target) return true;
+            if (mid < target) low = indexMid + 1;
+            if (mid > target) high = indexMid - 1;
         }
+        return false;
     }
 
     public static void main(String[] args) {
-        int[][] arr = {{1, 2, 3, 4},
-                {5, 6, 7, 8},
-                {9, 10, 11, 12},
-                {13, 14, 15, 16}};
-        rotate(arr);
-        Arrays.stream(arr).map(Arrays::toString).forEach(System.out::println);
+        int[][] test1 = {{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}};
+        int[][] test2 = {{1}, {2}};
+        System.out.println(searchMatrix(test2, 2));
     }
 }
