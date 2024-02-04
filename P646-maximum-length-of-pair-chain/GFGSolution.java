@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Comparator;
 
-class Solution {
+class GFGSolution {
     public static int findLongestChain(int[][] pairs) {
         if (pairs.length == 1) return 1;
         Pair[] pairArr = new Pair[pairs.length];
